@@ -1,13 +1,18 @@
 package cc.easyandroid.easyloadmore;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import cc.easyandroid.easyloadmore.core.SimpleAdapter;
+import cc.easyandroid.easyloadmore.widget.LoadMoreContainer;
+import cc.easyandroid.easyloadmore.widget.LoadMoreHandler;
+import cc.easyandroid.easyloadmore.widget.LoadMoreListViewContainer;
+import cc.easyandroid.easyloadmore.widget.LoadMoreUIHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,15 +22,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        final  SimpleAdapter simpleAdapter = new SimpleAdapter(this);
+         ListView listview = (ListView) findViewById(R.id.listview);
+        simpleAdapter.addAll("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","");
+        LoadMoreListViewContainer loadMoreListViewContainer= (LoadMoreListViewContainer) findViewById(R.id.loadMoreListViewContainer);
+        loadMoreListViewContainer.useDefaultFooter();
+        listview.setAdapter(simpleAdapter);
+        loadMoreListViewContainer.setLoadMoreHandler(new LoadMoreHandler() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onLoadMore(final LoadMoreContainer loadMoreContainer) {
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        SystemClock.sleep(2000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                simpleAdapter.addAll("","","","","","","","","","");
+                                loadMoreContainer.loadMoreFinish(false,true);
+                            }
+                        });
+                    }
+                }.start();
+
+
             }
         });
+
+
+        loadMoreListViewContainer.setAutoLoadMore(true);
+        loadMoreListViewContainer.setShowLoadingForFirstPage(true);
     }
 
     @Override
@@ -49,4 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

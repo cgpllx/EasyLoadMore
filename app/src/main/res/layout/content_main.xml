@@ -12,8 +12,14 @@
     tools:context="cc.easyandroid.easyloadmore.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <cc.easyandroid.easyloadmore.widget.LoadMoreListViewContainer
+        android:id="@+id/loadMoreListViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </cc.easyandroid.easyloadmore.widget.LoadMoreListViewContainer>
 </RelativeLayout>

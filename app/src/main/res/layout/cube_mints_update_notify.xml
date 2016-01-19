@@ -42,7 +42,7 @@
                 android:layout_below="@id/update_notification_text"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="5dp"
-                android:progressDrawable="@drawable/cube_mints_update_progressbar" />
+                />
         </RelativeLayout>
     </LinearLayout>
 
