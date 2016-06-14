@@ -12,7 +12,6 @@ import cc.easyandroid.easyloadmore.core.SimpleAdapter;
 import cc.easyandroid.easyloadmore.widget.LoadMoreContainer;
 import cc.easyandroid.easyloadmore.widget.LoadMoreHandler;
 import cc.easyandroid.easyloadmore.widget.LoadMoreListViewContainer;
-import cc.easyandroid.easyloadmore.widget.LoadMoreUIHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                             public void run() {
                                 simpleAdapter.addAll("","","","","","","","","","");
                                 loadMoreContainer.loadMoreFinish(false,true);
+                                loadMoreContainer.loadMoreError(0,"error");
                             }
                         });
                     }
